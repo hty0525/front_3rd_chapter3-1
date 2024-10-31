@@ -1,20 +1,10 @@
 ## 7주차 과제 체크포인트
 
-### 기본과제
+### 기본 과제
 
-#### Medium
+#### Easy
 
-- [ ] 총 11개의 파일, 115개의 단위 테스트를 무사히 작성하고 통과시킨다.
-
-#### 질문
-
-> Q. medium.useEventOperations.spec.tsx > 아래 toastFn과 mock과 이 fn은 무엇을 해줄까요?
-
-> Q. medium.integration.spec.tsx > 여기서 ChakraProvider로 묶어주는 동작은 의미있을까요? 있다면 어떤 의미일까요?
-
-> Q. handlersUtils > 아래 여러가지 use 함수는 어떤 역할을 할까요? 어떻게 사용될 수 있을까요?
-
-> Q. setupTests.ts > 왜 이 시간을 설정해주는 걸까요?
+- [ ] 총 8개의 파일, 90개의 단위 테스트를 무사히 작성하고 통과시킨다.
 
 ### 심화 과제
 

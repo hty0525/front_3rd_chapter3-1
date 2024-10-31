@@ -3,8 +3,6 @@ import { http, HttpResponse } from 'msw';
 import { Event, EventForm } from '../types';
 import { events } from './response/events.json' assert { type: 'json' };
 
-// ! HARD
-// ! 각 응답에 대한 MSW 핸들러를 작성해주세요. GET 요청은 이미 작성되어 있는 events json을 활용해주세요.
 export const handlers = [
   http.get('/api/events', () => {
     return HttpResponse.json({ events });
@@ -17,19 +15,26 @@ export const handlers = [
     return HttpResponse.json({ events }, { status: 201 });
   }),
 
-  http.put('/api/events/:id', async ({ request, params }) => {
+  http.put('/api/events/:id', async ({ params, request }) => {
     const { id } = params;
     const updatedEvent = (await request.json()) as Event;
     const targetIndex = events.findIndex((event) => event.id === id);
-    events[targetIndex] = updatedEvent;
-    return HttpResponse.json({ events });
+
+    if (targetIndex !== -1) {
+      return HttpResponse.json({ ...events[targetIndex], ...updatedEvent });
+    }
+
+    return new HttpResponse(null, { status: 404 });
   }),
 
   http.delete('/api/events/:id', ({ params }) => {
     const { id } = params;
     const targetIndex = events.findIndex((event) => event.id === id);
     events.splice(targetIndex, 1);
+    if (targetIndex !== -1) {
+      return new HttpResponse(null, { status: 204 });
+    }
 
-    return HttpResponse.json({ events });
+    return new HttpResponse(null, { status: 404 });
   }),
 ];

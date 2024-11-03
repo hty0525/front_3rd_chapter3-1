@@ -138,13 +138,80 @@ describe('getWeeksAtMonth', () => {
 });
 
 describe('getEventsForDay', () => {
-  it('특정 날짜(1일)에 해당하는 이벤트만 정확히 반환한다', () => {});
+  const mockEvents: Event[] = [
+    {
+      id: '1',
+      title: '팀 미팅',
+      date: '2024-03-20',
+      startTime: '10:00',
+      endTime: '11:30',
+      description: '주간 팀 미팅',
+      location: '회의실 A',
+      category: '업무',
+      repeat: {
+        type: 'weekly',
+        interval: 1,
+        endDate: '2024-06-20',
+      },
+      notificationTime: 30,
+    },
+    {
+      id: '2',
+      title: '생일 파티',
+      date: '2024-03-25',
+      startTime: '18:00',
+      endTime: '21:00',
+      description: '친구 생일 파티',
+      location: '레스토랑 xyz',
+      category: '개인',
+      repeat: {
+        type: 'none',
+        interval: 0,
+      },
+      notificationTime: 60,
+    },
+    {
+      id: '3',
+      title: '병원 예약',
+      date: '2024-03-22',
+      startTime: '14:00',
+      endTime: '15:00',
+      description: '정기 검진',
+      location: '서울 중앙 병원',
+      category: '건강',
+      repeat: {
+        type: 'monthly',
+        interval: 3,
+        endDate: '2024-12-22',
+      },
+      notificationTime: 120,
+    },
+  ];
 
-  it('해당 날짜에 이벤트가 없을 경우 빈 배열을 반환한다', () => {});
+  it('특정 날짜에 해당하는 이벤트만 정확히 반환한다', () => {
+    expect(getEventsForDay(mockEvents, 25)).toEqual([
+      {
+        id: '2',
+        title: '생일 파티',
+        date: '2024-03-25',
+        startTime: '18:00',
+        endTime: '21:00',
+        description: '친구 생일 파티',
+        location: '레스토랑 xyz',
+        category: '개인',
+        repeat: { type: 'none', interval: 0 },
+        notificationTime: 60,
+      },
+    ]);
+  });
 
-  it('날짜가 0일 경우 빈 배열을 반환한다', () => {});
+  it('해당 날짜에 이벤트가 없을 경우 빈 배열을 반환한다', () => {
+    expect(getEventsForDay(mockEvents, 26)).toEqual([]);
+  });
 
-  it('날짜가 32일 이상인 경우 빈 배열을 반환한다', () => {});
+  it('올바르지 않은 날짜에 대해 빈 배열을 반환한다.', () => {
+    expect(getEventsForDay(mockEvents, 32)).toEqual([]);
+  });
 });
 
 describe('formatWeek', () => {

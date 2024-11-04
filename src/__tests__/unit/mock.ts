@@ -18,6 +18,22 @@ export const mockEvents: Event[] = [
     notificationTime: 30,
   },
   {
+    id: '1',
+    title: '팀 미팅',
+    date: '2024-03-20',
+    startTime: '10:00',
+    endTime: '18:30',
+    description: '개발 팀 미팅',
+    location: '회의실 B',
+    category: '업무',
+    repeat: {
+      type: 'weekly',
+      interval: 2,
+      endDate: '2024-06-25',
+    },
+    notificationTime: 30,
+  },
+  {
     id: '2',
     title: '생일 파티',
     date: '2024-03-25',

@@ -1,4 +1,4 @@
-import { Event } from '../../types';
+import { mockEvents } from './mock';
 import {
   convertEventToDateRange,
   findOverlappingEvents,

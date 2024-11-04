@@ -18,7 +18,7 @@ export const mockEvents: Event[] = [
     notificationTime: 30,
   },
   {
-    id: '1',
+    id: '9',
     title: '팀 미팅',
     date: '2024-03-20',
     startTime: '10:00',
@@ -65,3 +65,37 @@ export const mockEvents: Event[] = [
     notificationTime: 120,
   },
 ];
+
+export const mockNewEvent: Event = {
+  id: '5',
+  title: '팀 미팅',
+  date: '2024-03-20',
+  startTime: '09:00',
+  endTime: '18:30',
+  description: '주간 팀 미팅',
+  location: '회의실 A',
+  category: '업무',
+  repeat: {
+    type: 'weekly',
+    interval: 1,
+    endDate: '2024-06-20',
+  },
+  notificationTime: 30,
+};
+
+export const mockNewEventNoOverLapping: Event = {
+  id: '5',
+  title: '팀 미팅',
+  date: '2024-04-20',
+  startTime: '09:00',
+  endTime: '18:30',
+  description: '주간 팀 미팅',
+  location: '회의실 A',
+  category: '업무',
+  repeat: {
+    type: 'weekly',
+    interval: 1,
+    endDate: '2024-06-20',
+  },
+  notificationTime: 30,
+};

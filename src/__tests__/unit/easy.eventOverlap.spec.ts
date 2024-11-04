@@ -29,11 +29,28 @@ describe('parseDateTime', () => {
 });
 
 describe('convertEventToDateRange', () => {
-  it('일반적인 이벤트를 올바른 시작 및 종료 시간을 가진 객체로 변환한다', () => {});
+  it('일반적인 이벤트를 올바른 시작 및 종료 시간을 가진 객체로 변환한다', () => {
+    expect(convertEventToDateRange({ ...mockEvents[0] })).toEqual({
+      start: new Date('2024-03-20T10:00'),
+      end: new Date('2024-03-20T11:30'),
+    });
+  });
 
-  it('잘못된 날짜 형식의 이벤트에 대해 Invalid Date를 반환한다', () => {});
+  it('잘못된 날짜 형식의 이벤트에 대해 Invalid Date를 반환한다', () => {
+    expect(convertEventToDateRange({ ...mockEvents[0], date: '2024-03-40' })).toEqual({
+      start: new Date('Invalid Date'),
+      end: new Date('Invalid Date'),
+    });
+  });
 
-  it('잘못된 시간 형식의 이벤트에 대해 Invalid Date를 반환한다', () => {});
+  it('잘못된 시간 형식의 이벤트에 대해 Invalid Date를 반환한다', () => {
+    expect(
+      convertEventToDateRange({ ...mockEvents[0], startTime: '25:30', endTime: '26:30' })
+    ).toEqual({
+      start: new Date('Invalid Date'),
+      end: new Date('Invalid Date'),
+    });
+  });
 });
 
 describe('isOverlapping', () => {

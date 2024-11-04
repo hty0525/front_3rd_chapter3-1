@@ -95,7 +95,10 @@ export function isDateInRange(date: Date, rangeStart: Date, rangeEnd: Date): boo
 }
 
 export function fillZero(value: number, size = 2) {
-  return String(value).padStart(size, '0');
+  const [frontNumber, backNumber] = value.toString().split('.');
+  const filledFrontNumber = frontNumber.padStart(size, '0');
+
+  return backNumber ? `${filledFrontNumber}.${backNumber}` : filledFrontNumber;
 }
 
 export function formatDate(currentDate: Date, day?: number) {

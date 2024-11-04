@@ -7,13 +7,25 @@ import {
 } from '../../utils/eventOverlap';
 
 describe('parseDateTime', () => {
-  it('2024-07-01 14:30을 정확한 Date 객체로 변환한다', () => {});
+  it('2024-07-01 14:30을 정확한 Date 객체로 변환한다', () => {
+    expect(parseDateTime('2024-07-01', '14:30')).toEqual(new Date('2024-07-01T14:30'));
+  });
 
-  it('잘못된 날짜 형식에 대해 Invalid Date를 반환한다', () => {});
+  it('잘못된 날짜 형식에 대해 Invalid Date를 반환한다', () => {
+    expect(parseDateTime('2024-07-40', '20:30')).toEqual(new Date('Invalid Date'));
+    expect(parseDateTime('2024-15-01', '15:30')).toEqual(new Date('Invalid Date'));
+    expect(parseDateTime('10000-12-01', '18:30')).toEqual(new Date('Invalid Date'));
+  });
 
-  it('잘못된 시간 형식에 대해 Invalid Date를 반환한다', () => {});
+  it('잘못된 시간 형식에 대해 Invalid Date를 반환한다', () => {
+    expect(parseDateTime('2024-07-01', '25:30')).toEqual(new Date('Invalid Date'));
+    expect(parseDateTime('2024-07-01', '18:60')).toEqual(new Date('Invalid Date'));
+    expect(parseDateTime('2024-07-01', '18:99')).toEqual(new Date('Invalid Date'));
+  });
 
-  it('날짜 문자열이 비어있을 때 Invalid Date를 반환한다', () => {});
+  it('날짜 문자열이 비어있을 때 Invalid Date를 반환한다', () => {
+    expect(parseDateTime('', '18:30')).toEqual(new Date('Invalid Date'));
+  });
 });
 
 describe('convertEventToDateRange', () => {

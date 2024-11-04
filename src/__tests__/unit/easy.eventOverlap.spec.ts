@@ -65,7 +65,12 @@ describe('isOverlapping', () => {
 
 describe('findOverlappingEvents', () => {
   it('새 이벤트와 겹치는 모든 이벤트를 반환한다', () => {
-    expect(findOverlappingEvents(mockNewEvent, mockEvents)).toEqual([mockEvents[0], mockEvents[1]]);
+    expect(findOverlappingEvents(mockNewEvent, mockEvents)).toEqual([
+      mockEvents[0],
+      mockEvents[1],
+      mockEvents[4],
+      mockEvents[5],
+    ]);
   });
 
   it('겹치는 이벤트가 없으면 빈 배열을 반환한다', () => {

@@ -1,5 +1,3 @@
-import { randomUUID } from 'crypto';
-
 import { http, HttpResponse } from 'msw';
 
 import { Event, EventForm } from '../types';
@@ -20,7 +18,14 @@ export const handlers = [
     return HttpResponse.json({ events }, { status: 201 });
   }),
 
-  http.put('/api/events/:id', async () => {}),
+  http.put('/api/events/:id', async ({ request, params }) => {
+    const { id } = params;
+    const updatedEvent = (await request.json()) as Event;
+    const targetIndex = events.findIndex((event) => event.id === id);
+    events[targetIndex] = updatedEvent;
+
+    return HttpResponse.json({ events: [updatedEvent] });
+  }),
 
   http.delete('/api/events/:id', ({ params }) => {}),
 ];

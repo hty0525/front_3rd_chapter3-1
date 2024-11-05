@@ -27,5 +27,11 @@ export const handlers = [
     return HttpResponse.json({ events: [updatedEvent] });
   }),
 
-  http.delete('/api/events/:id', ({ params }) => {}),
+  http.delete('/api/events/:id', ({ params }) => {
+    const { id } = params;
+    const targetIndex = events.findIndex((event) => event.id === id);
+    events.splice(targetIndex, 1);
+
+    return HttpResponse.json({ events });
+  }),
 ];

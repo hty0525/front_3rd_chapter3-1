@@ -11,10 +11,7 @@ export const setupMockHandlerCreation = (initEvents = [] as Event[]) => {
     serverGet(initEvents),
     http.post('/api/events', async ({ request }) => {
       const newEvent = (await request.json()) as EventForm;
-      initEvents.push({
-        id: String(Number(initEvents[initEvents.length - 1].id) + 1),
-        ...newEvent,
-      });
+      initEvents.push({ id: String(initEvents.length + 1), ...newEvent });
       return HttpResponse.json({ events: [...initEvents, newEvent] }, { status: 201 });
     })
   );
@@ -47,6 +44,7 @@ export const setupMockHandlerDeletion = (initEvents = [] as Event[]) => {
 
 const serverGet = (initEvents = [] as Event[]) => {
   return http.get('/api/events', () => {
+    console.log(initEvents);
     return HttpResponse.json({ events: initEvents });
   });
 };

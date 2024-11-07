@@ -20,7 +20,7 @@ module.exports = {
     ecmaVersion: 2022,
   },
   rules: {
-    'no-unused-vars': ['error', { destructuredArrayIgnorePattern: '^_' }],
+    'no-unused-vars': 'error',
     'react/prop-types': 'off',
     'import/order': [
       'error',

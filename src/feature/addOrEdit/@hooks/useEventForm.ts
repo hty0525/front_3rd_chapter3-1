@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { ChangeEvent, useEffect, useState } from 'react';
 
 import { Event, RepeatType } from '../../../types';

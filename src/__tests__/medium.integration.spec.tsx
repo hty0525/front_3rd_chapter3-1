@@ -1,3 +1,4 @@
+/* eslint-disable vitest/no-commented-out-tests */
 // // ! HINT. 이 유틸을 사용해 리액트 컴포넌트를 렌더링해보세요.
 
 // ! HINT. 이 유틸을 사용해 일정을 저장해보세요.
@@ -48,52 +49,52 @@ describe('일정 CRUD 및 기본 기능', () => {
   });
 });
 
-describe('일정 뷰', () => {
-  it('주별 뷰를 선택 후 해당 주에 일정이 없으면, 일정이 표시되지 않는다.', async () => {
-    expect(true).toBe(true);
-  });
+// describe('일정 뷰', () => {
+//   it('주별 뷰를 선택 후 해당 주에 일정이 없으면, 일정이 표시되지 않는다.', async () => {
+//     expect(true).toBe(true);
+//   });
 
-  it('주별 뷰 선택 후 해당 일자에 일정이 존재한다면 해당 일정이 정확히 표시된다', async () => {
-    expect(true).toBe(true);
-  });
+//   it('주별 뷰 선택 후 해당 일자에 일정이 존재한다면 해당 일정이 정확히 표시된다', async () => {
+//     expect(true).toBe(true);
+//   });
 
-  it('월별 뷰에 일정이 없으면, 일정이 표시되지 않아야 한다.', async () => {
-    expect(true).toBe(true);
-  });
+//   it('월별 뷰에 일정이 없으면, 일정이 표시되지 않아야 한다.', async () => {
+//     expect(true).toBe(true);
+//   });
 
-  it('월별 뷰에 일정이 정확히 표시되는지 확인한다', async () => {
-    expect(true).toBe(true);
-  });
+//   it('월별 뷰에 일정이 정확히 표시되는지 확인한다', async () => {
+//     expect(true).toBe(true);
+//   });
 
-  it('달력에 1월 1일(신정)이 공휴일로 표시되는지 확인한다', async () => {
-    expect(true).toBe(true);
-  });
-});
+//   it('달력에 1월 1일(신정)이 공휴일로 표시되는지 확인한다', async () => {
+//     expect(true).toBe(true);
+//   });
+// });
 
-describe('검색 기능', () => {
-  it('검색 결과가 없으면, "검색 결과가 없습니다."가 표시되어야 한다.', async () => {
-    expect(true).toBe(true);
-  });
+// describe('검색 기능', () => {
+//   it('검색 결과가 없으면, "검색 결과가 없습니다."가 표시되어야 한다.', async () => {
+//     expect(true).toBe(true);
+//   });
 
-  it("'팀 회의'를 검색하면 해당 제목을 가진 일정이 리스트에 노출된다", async () => {
-    expect(true).toBe(true);
-  });
+//   it("'팀 회의'를 검색하면 해당 제목을 가진 일정이 리스트에 노출된다", async () => {
+//     expect(true).toBe(true);
+//   });
 
-  it('검색어를 지우면 모든 일정이 다시 표시되어야 한다', async () => {
-    expect(true).toBe(true);
-  });
-});
+//   it('검색어를 지우면 모든 일정이 다시 표시되어야 한다', async () => {
+//     expect(true).toBe(true);
+//   });
+// });
 
-describe('일정 충돌', () => {
-  it('겹치는 시간에 새 일정을 추가할 때 경고가 표시된다', async () => {
-    expect(true).toBe(true);
-  });
+// describe('일정 충돌', () => {
+//   it('겹치는 시간에 새 일정을 추가할 때 경고가 표시된다', async () => {
+//     expect(true).toBe(true);
+//   });
 
-  it('기존 일정의 시간을 수정하여 충돌이 발생하면 경고가 노출된다', async () => {
-    expect(true).toBe(true);
-  });
-});
+//   it('기존 일정의 시간을 수정하여 충돌이 발생하면 경고가 노출된다', async () => {
+//     expect(true).toBe(true);
+//   });
+// });
 
-it('notificationTime을 10으로 하면 지정 시간 10분 전 알람 텍스트가 노출된다', async () => {
-  expect(true).toBe(true);
-});
+// it('notificationTime을 10으로 하면 지정 시간 10분 전 알람 텍스트가 노출된다', async () => {
+//   expect(true).toBe(true);
+// });

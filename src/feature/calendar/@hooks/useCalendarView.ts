@@ -1,11 +1,20 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
-import { fetchHolidays } from '../apis/fetchHolidays';
+import { useGetHolidays } from '../@service';
 
-export const useCalendarView = () => {
+export type CalendarView = {
+  view: 'week' | 'month';
+  currentDate: Date;
+  holidays: Record<string, string[]> | {};
+  navigate: (_direction: 'prev' | 'next') => void;
+  setView: React.Dispatch<React.SetStateAction<'week' | 'month'>>;
+  setCurrentDate: React.Dispatch<React.SetStateAction<Date>>;
+};
+
+export const useCalendarView = (): CalendarView => {
   const [view, setView] = useState<'week' | 'month'>('month');
   const [currentDate, setCurrentDate] = useState(new Date());
-  const [holidays, setHolidays] = useState<{ [key: string]: string }>({});
+  const { data: holidays = {} } = useGetHolidays(currentDate);
 
   const navigate = (direction: 'prev' | 'next') => {
     setCurrentDate((prevDate) => {
@@ -19,10 +28,6 @@ export const useCalendarView = () => {
       return newDate;
     });
   };
-
-  useEffect(() => {
-    setHolidays(fetchHolidays(currentDate));
-  }, [currentDate]);
 
   return { view, setView, currentDate, setCurrentDate, holidays, navigate };
 };

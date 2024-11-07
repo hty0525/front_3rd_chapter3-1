@@ -1,1 +1,3 @@
-export * from './TanstackQueryProvider';
+export * from './TanStackQueryProvider';
+
+export * from './combinedContext';

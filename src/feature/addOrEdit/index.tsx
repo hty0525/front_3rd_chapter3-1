@@ -20,7 +20,7 @@ import { findOverlappingEvents } from '../../utils/eventOverlap';
 import { getTimeErrorMessage } from '../../utils/timeValidation';
 
 export function AddOrEdit() {
-  const { events, saveEvent, editingEvent } = useCombinedContext();
+  const { events, saveEvent, editingEvent, openOverlapDialog } = useCombinedContext();
 
   const {
     title,
@@ -95,7 +95,8 @@ export function AddOrEdit() {
     const overlapping = findOverlappingEvents(eventData, events);
     if (overlapping.length > 0) {
       findOverlappingEvents(eventData, events);
-      // setIsOverlapDialogOpen(true);
+      openOverlapDialog(eventData as Event);
+      resetForm();
     } else {
       await saveEvent(eventData);
       resetForm();

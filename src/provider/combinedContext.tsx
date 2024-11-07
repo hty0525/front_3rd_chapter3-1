@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState } from 'react';
 
+import { type UseAlertDialog, useAlertDialog } from '../feature/addOrEdit/@hooks/useAlertDialog';
 import {
   type UseEventOperations,
   useEventOperations,
@@ -13,10 +14,11 @@ import { type UseSearch, useSearch } from '../feature/searchCalendar/@hooks/useS
 import { Event } from '../types';
 
 const CombinedContext = createContext<
-  | (UseCalendarView &
+  | ((UseCalendarView &
       UseEventOperations &
       UseSearch &
-      UseNotifications & { editingEvent: Event | null })
+      UseNotifications & { editingEvent: Event | null }) &
+      UseAlertDialog)
   | null
 >(null);
 
@@ -39,6 +41,8 @@ export function CombinedContextProvider({ children }: Props) {
     setEditingEvent(event);
   };
 
+  const alertDialog = useAlertDialog();
+
   const eventOperations = useEventOperations(Boolean(editingEvent), () => setEditingEvent(null));
 
   const search = useSearch(eventOperations.events, calendar.currentDate, calendar.view);
@@ -52,6 +56,7 @@ export function CombinedContextProvider({ children }: Props) {
     setEditingEvent,
     ...search,
     ...notifications,
+    ...alertDialog,
   };
   return <CombinedContext.Provider value={value}>{children}</CombinedContext.Provider>;
 }

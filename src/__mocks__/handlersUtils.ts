@@ -44,7 +44,6 @@ export const setupMockHandlerDeletion = (initEvents = [] as Event[]) => {
 
 const serverGet = (initEvents = [] as Event[]) => {
   return http.get('/api/events', () => {
-    console.log(initEvents);
     return HttpResponse.json({ events: initEvents });
   });
 };

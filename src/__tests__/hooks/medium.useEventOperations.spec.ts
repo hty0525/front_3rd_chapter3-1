@@ -128,8 +128,6 @@ it("이벤트 로딩 실패 시 '이벤트 로딩 실패'라는 텍스트와 함
     duration: 3000,
     isClosable: true,
   });
-
-  console.log(toastFn.mock.calls);
 });
 
 it("존재하지 않는 이벤트 수정 시 '일정 저장 실패'라는 토스트가 노출되며 에러 처리가 되어야 한다", async () => {

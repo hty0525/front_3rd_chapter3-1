@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-import { useGetHolidays } from '../@service';
+import { fetchHolidays } from '../../../apis/fetchHolidays';
 
 export type UseCalendarView = {
   view: 'week' | 'month';
@@ -15,7 +15,7 @@ export type UseCalendarView = {
 export const useCalendarView = (): UseCalendarView => {
   const [view, setView] = useState<'week' | 'month'>('month');
   const [currentDate, setCurrentDate] = useState(new Date());
-  const { data: holidays = {} } = useGetHolidays(currentDate);
+  const [holidays, setHolidays] = useState<{ [key: string]: string }>({});
 
   const navigate = (direction: 'prev' | 'next') => {
     setCurrentDate((prevDate) => {
@@ -29,6 +29,10 @@ export const useCalendarView = (): UseCalendarView => {
       return newDate;
     });
   };
+
+  useEffect(() => {
+    setHolidays(fetchHolidays(currentDate));
+  }, [currentDate]);
 
   return { view, setView, currentDate, setCurrentDate, holidays, navigate };
 };

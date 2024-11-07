@@ -3,16 +3,14 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 
 import App from './App.tsx';
-import { CombinedContextProvider, TanstackQueryProvider } from './provider';
+import { CombinedContextProvider } from './provider';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <ChakraProvider>
-      <TanstackQueryProvider>
-        <CombinedContextProvider>
-          <App />
-        </CombinedContextProvider>
-      </TanstackQueryProvider>
+      <CombinedContextProvider>
+        <App />
+      </CombinedContextProvider>
     </ChakraProvider>
   </React.StrictMode>
 );

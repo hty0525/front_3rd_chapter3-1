@@ -1,4 +1,4 @@
-import { BellIcon, EditIcon, DeleteIcon } from '@chakra-ui/icons';
+import { EditIcon, DeleteIcon } from '@chakra-ui/icons';
 import {
   Box,
   FormControl,

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { createContext, useContext, useState } from 'react';
 
 import { type UseAlertDialog, useAlertDialog } from '../feature/addOrEdit/@hooks/useAlertDialog';
@@ -17,7 +18,7 @@ const CombinedContext = createContext<
   | ((UseCalendarView &
       UseEventOperations &
       UseSearch &
-      UseNotifications & { editingEvent: Event | null }) &
+      UseNotifications & { editingEvent: Event | null; editEvent: (event: Event) => void }) &
       UseAlertDialog)
   | null
 >(null);

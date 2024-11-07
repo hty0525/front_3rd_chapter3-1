@@ -1,13 +1,16 @@
-import React, { createContext, useContext } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 
-import { useEventForm } from '../feature/addOrEdit/@hooks/useEventForm';
 import {
-  EventOperations,
+  type UseEventOperations,
   useEventOperations,
 } from '../feature/addOrEdit/@hooks/useEventOperations';
-import { CalendarView, useCalendarView } from '../feature/calendar/@hooks/useCalendarView';
+import { type UseCalendarView, useCalendarView } from '../feature/calendar/@hooks/useCalendarView';
+import { type UseSearch, useSearch } from '../feature/searchCalendar/@hooks/useSearch';
+import { Event } from '../types';
 
-const CombinedContext = createContext<(CalendarView & EventOperations) | null>(null);
+const CombinedContext = createContext<
+  (UseCalendarView & UseEventOperations & UseSearch & { editingEvent: Event | null }) | null
+>(null);
 
 export const useCombinedContext = () => {
   const context = useContext(CombinedContext);
@@ -23,9 +26,22 @@ type Props = {
 
 export function CombinedContextProvider({ children }: Props) {
   const calendar = useCalendarView();
-  const { editingEvent, setEditingEvent } = useEventForm();
+  const [editingEvent, setEditingEvent] = useState<Event | null>(null);
+  const editEvent = (event: Event) => {
+    setEditingEvent(event);
+  };
+
   const eventOperations = useEventOperations(Boolean(editingEvent), () => setEditingEvent(null));
 
-  const value = { ...calendar, eventOperations, editingEvent, setEditingEvent, ...eventOperations };
+  const search = useSearch(eventOperations.events, calendar.currentDate, calendar.view);
+
+  const value = {
+    ...calendar,
+    ...eventOperations,
+    editEvent,
+    editingEvent,
+    setEditingEvent,
+    ...search,
+  };
   return <CombinedContext.Provider value={value}>{children}</CombinedContext.Provider>;
 }

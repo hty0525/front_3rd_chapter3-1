@@ -1,8 +1,9 @@
-import { useState } from 'react';
+/* eslint-disable no-unused-vars */
+import React, { useState } from 'react';
 
 import { useGetHolidays } from '../@service';
 
-export type CalendarView = {
+export type UseCalendarView = {
   view: 'week' | 'month';
   currentDate: Date;
   holidays: Record<string, string[]> | {};
@@ -11,7 +12,7 @@ export type CalendarView = {
   setCurrentDate: React.Dispatch<React.SetStateAction<Date>>;
 };
 
-export const useCalendarView = (): CalendarView => {
+export const useCalendarView = (): UseCalendarView => {
   const [view, setView] = useState<'week' | 'month'>('month');
   const [currentDate, setCurrentDate] = useState(new Date());
   const { data: holidays = {} } = useGetHolidays(currentDate);

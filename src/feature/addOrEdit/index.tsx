@@ -20,7 +20,7 @@ import { findOverlappingEvents } from '../../utils/eventOverlap';
 import { getTimeErrorMessage } from '../../utils/timeValidation';
 
 export function AddOrEdit() {
-  const { events } = useCombinedContext();
+  const { events, saveEvent, editingEvent } = useCombinedContext();
 
   const {
     title,
@@ -45,15 +45,12 @@ export function AddOrEdit() {
     setRepeatEndDate,
     notificationTime,
     setNotificationTime,
-    editingEvent,
     handleStartTimeChange,
     handleEndTimeChange,
     startTimeError,
     endTimeError,
     resetForm,
-  } = useEventForm();
-
-  const { saveEvent } = useCombinedContext();
+  } = useEventForm(editingEvent || undefined);
 
   const toast = useToast();
 
@@ -104,7 +101,6 @@ export function AddOrEdit() {
       resetForm();
     }
   };
-
   return (
     <VStack w="400px" spacing={5} align="stretch">
       <Heading>{editingEvent ? '일정 수정' : '일정 추가'}</Heading>

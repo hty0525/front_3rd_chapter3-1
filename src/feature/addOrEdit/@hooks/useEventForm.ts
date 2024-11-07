@@ -1,4 +1,5 @@
-import { ChangeEvent, useState } from 'react';
+/* eslint-disable no-unused-vars */
+import { ChangeEvent, useEffect, useState } from 'react';
 
 import { Event, RepeatType } from '../../../types';
 import { getTimeErrorMessage } from '../../../utils/timeValidation';
@@ -19,7 +20,6 @@ export const useEventForm = (initialEvent?: Event) => {
   const [repeatEndDate, setRepeatEndDate] = useState(initialEvent?.repeat.endDate || '');
   const [notificationTime, setNotificationTime] = useState(initialEvent?.notificationTime || 10);
 
-  const [editingEvent, setEditingEvent] = useState<Event | null>(null);
   const [{ startTimeError, endTimeError }, setTimeError] = useState<TimeErrorRecord>({
     startTimeError: null,
     endTimeError: null,
@@ -52,21 +52,22 @@ export const useEventForm = (initialEvent?: Event) => {
     setNotificationTime(10);
   };
 
-  const editEvent = (event: Event) => {
-    setEditingEvent(event);
-    setTitle(event.title);
-    setDate(event.date);
-    setStartTime(event.startTime);
-    setEndTime(event.endTime);
-    setDescription(event.description);
-    setLocation(event.location);
-    setCategory(event.category);
-    setIsRepeating(event.repeat.type !== 'none');
-    setRepeatType(event.repeat.type);
-    setRepeatInterval(event.repeat.interval);
-    setRepeatEndDate(event.repeat.endDate || '');
-    setNotificationTime(event.notificationTime);
-  };
+  useEffect(() => {
+    if (initialEvent) {
+      setTitle(initialEvent.title);
+      setDate(initialEvent.date);
+      setStartTime(initialEvent.startTime);
+      setEndTime(initialEvent.endTime);
+      setDescription(initialEvent.description);
+      setLocation(initialEvent.location);
+      setCategory(initialEvent.category);
+      setIsRepeating(initialEvent.repeat.type !== 'none');
+      setRepeatType(initialEvent.repeat.type);
+      setRepeatInterval(initialEvent.repeat.interval);
+      setRepeatEndDate(initialEvent.repeat.endDate || '');
+      setNotificationTime(initialEvent.notificationTime);
+    }
+  }, [initialEvent]);
 
   return {
     title,
@@ -95,11 +96,8 @@ export const useEventForm = (initialEvent?: Event) => {
     setNotificationTime,
     startTimeError,
     endTimeError,
-    editingEvent,
-    setEditingEvent,
     handleStartTimeChange,
     handleEndTimeChange,
     resetForm,
-    editEvent,
   };
 };

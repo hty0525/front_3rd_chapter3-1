@@ -4,17 +4,16 @@ import { useEffect, useState } from 'react';
 
 import { Event, EventForm } from '../../../types';
 
-export type EventOperations = {
+export type UseEventOperations = {
   events: Event[];
   fetchEvents: () => Promise<void>;
   saveEvent: (_eventData: Event | EventForm) => Promise<void>;
   deleteEvent: (_id: string) => Promise<void>;
 };
 
-export const useEventOperations = (editing: boolean, onSave?: () => void): EventOperations => {
+export const useEventOperations = (editing: boolean, onSave?: () => void): UseEventOperations => {
   const [events, setEvents] = useState<Event[]>([]);
   const toast = useToast();
-  console.log(editing);
 
   const fetchEvents = async () => {
     try {

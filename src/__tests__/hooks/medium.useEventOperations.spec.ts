@@ -7,7 +7,7 @@ import {
   setupMockHandlerUpdating,
 } from '../../__mocks__/handlersUtils.ts';
 import { events } from '../../__mocks__/response/events.json';
-import { useEventOperations } from '../../hooks/useEventOperations.ts';
+import { useEventOperations } from '../../feature/addOrEdit/@hooks/useEventOperations.ts';
 import { server } from '../../setupTests.ts';
 import { Event, EventForm } from '../../types.ts';
 

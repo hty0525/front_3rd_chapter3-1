@@ -1,43 +1,12 @@
-import { BellIcon, DeleteIcon, EditIcon } from '@chakra-ui/icons';
-import {
-  Alert,
-  AlertDialog,
-  AlertDialogBody,
-  AlertDialogContent,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogOverlay,
-  AlertIcon,
-  AlertTitle,
-  Box,
-  Button,
-  Checkbox,
-  CloseButton,
-  Flex,
-  FormControl,
-  FormLabel,
-  Heading,
-  HStack,
-  IconButton,
-  Input,
-  Select,
-  Text,
-  Tooltip,
-  useToast,
-  VStack,
-} from '@chakra-ui/react';
-import { useRef, useState } from 'react';
+import { Box, Flex } from '@chakra-ui/react';
+import { useRef } from 'react';
 
 import { AddOrEdit } from './feature/addOrEdit/index.tsx';
 import { Calendar } from './feature/calendar/index.tsx';
-import { useNotifications } from './hooks/useNotifications.ts';
-import { useSearch } from './feature/searchCalendar/@hooks/useSearch.ts';
-import { useCombinedContext } from './provider/combinedContext.tsx';
-import { Event, EventForm, RepeatType } from './types';
+import { Notifications } from './feature/notifications/index.tsx';
 import { SearchCalendar } from './feature/searchCalendar/index.tsx';
 
 function App() {
-  const { view, currentDate } = useCombinedContext();
   // const { searchTerm, filteredEvents, setSearchTerm } = useSearch(events, currentDate, view);
 
   // const [isOverlapDialogOpen, setIsOverlapDialogOpen] = useState(false);
@@ -107,21 +76,7 @@ function App() {
         </AlertDialogOverlay>
       </AlertDialog> */}
 
-      {/* {notifications.length > 0 && (
-        <VStack position="fixed" top={4} right={4} spacing={2} align="flex-end">
-          {notifications.map((notification, index) => (
-            <Alert key={index} status="info" variant="solid" width="auto">
-              <AlertIcon />
-              <Box flex="1">
-                <AlertTitle fontSize="sm">{notification.message}</AlertTitle>
-              </Box>
-              <CloseButton
-                onClick={() => setNotifications((prev) => prev.filter((_, i) => i !== index))}
-              />
-            </Alert>
-          ))}
-        </VStack>
-      )} */}
+      <Notifications />
     </Box>
   );
 }

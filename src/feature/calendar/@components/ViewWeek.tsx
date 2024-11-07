@@ -1,10 +1,11 @@
-import { Box, Td, Text } from '@chakra-ui/react';
+import { BellIcon } from '@chakra-ui/icons';
+import { Box, HStack, Td, Text } from '@chakra-ui/react';
 
 import { useCombinedContext } from '../../../provider';
 import { getWeekDates } from '../../../utils/dateUtils';
 
 export function ViewWeek() {
-  const { currentDate } = useCombinedContext();
+  const { currentDate, filteredEvents, notifiedEvents } = useCombinedContext();
 
   const weekDates = getWeekDates(currentDate);
   return (
@@ -12,7 +13,7 @@ export function ViewWeek() {
       {weekDates.map((date) => (
         <Td key={date.toISOString()} height="100px" verticalAlign="top" width="14.28%">
           <Text fontWeight="bold">{date.getDate()}</Text>
-          {/* {filteredEvents
+          {filteredEvents
             .filter((event) => new Date(event.date).toDateString() === date.toDateString())
             .map((event) => {
               const isNotified = notifiedEvents.includes(event.id);
@@ -34,7 +35,7 @@ export function ViewWeek() {
                   </HStack>
                 </Box>
               );
-            })} */}
+            })}
         </Td>
       ))}
     </>

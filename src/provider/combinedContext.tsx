@@ -5,11 +5,19 @@ import {
   useEventOperations,
 } from '../feature/addOrEdit/@hooks/useEventOperations';
 import { type UseCalendarView, useCalendarView } from '../feature/calendar/@hooks/useCalendarView';
+import {
+  type UseNotifications,
+  useNotifications,
+} from '../feature/notifications/@hooks/useNotifications';
 import { type UseSearch, useSearch } from '../feature/searchCalendar/@hooks/useSearch';
 import { Event } from '../types';
 
 const CombinedContext = createContext<
-  (UseCalendarView & UseEventOperations & UseSearch & { editingEvent: Event | null }) | null
+  | (UseCalendarView &
+      UseEventOperations &
+      UseSearch &
+      UseNotifications & { editingEvent: Event | null })
+  | null
 >(null);
 
 export const useCombinedContext = () => {
@@ -35,6 +43,7 @@ export function CombinedContextProvider({ children }: Props) {
 
   const search = useSearch(eventOperations.events, calendar.currentDate, calendar.view);
 
+  const notifications = useNotifications(eventOperations.events);
   const value = {
     ...calendar,
     ...eventOperations,
@@ -42,6 +51,7 @@ export function CombinedContextProvider({ children }: Props) {
     editingEvent,
     setEditingEvent,
     ...search,
+    ...notifications,
   };
   return <CombinedContext.Provider value={value}>{children}</CombinedContext.Provider>;
 }

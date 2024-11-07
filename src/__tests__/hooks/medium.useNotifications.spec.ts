@@ -1,6 +1,6 @@
 import { act, renderHook } from '@testing-library/react';
 
-import { useNotifications } from '../../hooks/useNotifications.ts';
+import { useNotifications } from '../../feature/notifications/@hooks/useNotifications.ts';
 import { Event } from '../../types.ts';
 import { createNotificationMessage } from '../../utils/notificationUtils.ts';
 

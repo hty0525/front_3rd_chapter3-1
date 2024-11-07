@@ -1,11 +1,20 @@
+/* eslint-disable no-unused-vars */
 import { useToast } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 
-import { Event, EventForm } from '../types';
+import { Event, EventForm } from '../../../types';
 
-export const useEventOperations = (editing: boolean, onSave?: () => void) => {
+export type EventOperations = {
+  events: Event[];
+  fetchEvents: () => Promise<void>;
+  saveEvent: (_eventData: Event | EventForm) => Promise<void>;
+  deleteEvent: (_id: string) => Promise<void>;
+};
+
+export const useEventOperations = (editing: boolean, onSave?: () => void): EventOperations => {
   const [events, setEvents] = useState<Event[]>([]);
   const toast = useToast();
+  console.log(editing);
 
   const fetchEvents = async () => {
     try {

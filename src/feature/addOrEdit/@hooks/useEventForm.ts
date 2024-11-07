@@ -1,7 +1,7 @@
 import { ChangeEvent, useState } from 'react';
 
-import { Event, RepeatType } from '../types';
-import { getTimeErrorMessage } from '../utils/timeValidation';
+import { Event, RepeatType } from '../../../types';
+import { getTimeErrorMessage } from '../../../utils/timeValidation';
 
 type TimeErrorRecord = Record<'startTimeError' | 'endTimeError', string | null>;
 
@@ -20,7 +20,6 @@ export const useEventForm = (initialEvent?: Event) => {
   const [notificationTime, setNotificationTime] = useState(initialEvent?.notificationTime || 10);
 
   const [editingEvent, setEditingEvent] = useState<Event | null>(null);
-
   const [{ startTimeError, endTimeError }, setTimeError] = useState<TimeErrorRecord>({
     startTimeError: null,
     endTimeError: null,

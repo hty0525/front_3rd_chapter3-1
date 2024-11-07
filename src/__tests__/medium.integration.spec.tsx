@@ -1,47 +1,6 @@
-import { ChakraProvider } from '@chakra-ui/react';
-import { render, screen, within, act, RenderResult } from '@testing-library/react';
-import { UserEvent, userEvent } from '@testing-library/user-event';
-import { http, HttpResponse } from 'msw';
-import { ReactElement } from 'react';
-
-import {
-  setupMockHandlerCreation,
-  setupMockHandlerDeletion,
-  setupMockHandlerUpdating,
-} from '../__mocks__/handlersUtils';
-import { events } from '../__mocks__/response/events.json' assert { type: 'json' };
-import App from '../App';
-import { server } from '../setupTests';
-import { Event } from '../types';
-
 // // ! HINT. 이 유틸을 사용해 리액트 컴포넌트를 렌더링해보세요.
 
 // ! HINT. 이 유틸을 사용해 일정을 저장해보세요.
-
-const mockEvents = events as Event[];
-
-const mockNewEvent = {
-  title: '새로운 일정',
-  date: '2024-10-15',
-  category: '업무',
-  startTime: '09:00',
-  endTime: '10:00',
-  description: '새로운 일정 설명',
-  location: '새로운 일정 위치',
-};
-
-let user: UserEvent;
-
-let renderResult: RenderResult;
-
-beforeEach(() => {
-  renderResult = render(
-    <ChakraProvider>
-      <App />
-    </ChakraProvider>
-  );
-  user = userEvent.setup();
-});
 
 // ! HINT. "검색 결과가 없습니다"는 초기에 노출되는데요. 그럼 검증하고자 하는 액션이 실행되기 전에 검증해버리지 않을까요? 이 테스트를 신뢰성있게 만드려면 어떻게 할까요?
 describe('일정 CRUD 및 기본 기능', () => {

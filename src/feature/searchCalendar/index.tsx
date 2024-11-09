@@ -1,4 +1,4 @@
-import { EditIcon, DeleteIcon } from '@chakra-ui/icons';
+import { EditIcon, DeleteIcon, BellIcon } from '@chakra-ui/icons';
 import {
   Box,
   FormControl,
@@ -14,7 +14,7 @@ import { useCombinedContext } from '../../provider';
 import { NOTIFICATION_OPTIONS } from '../addOrEdit/@constant';
 
 export function SearchCalendar() {
-  const { searchTerm, setSearchTerm, filteredEvents, deleteEvent, editEvent } =
+  const { searchTerm, setSearchTerm, filteredEvents, deleteEvent, editEvent, notifiedEvents } =
     useCombinedContext();
   return (
     <VStack data-testid="event-list" w="500px" h="full" overflowY="auto">
@@ -35,13 +35,13 @@ export function SearchCalendar() {
             <HStack justifyContent="space-between">
               <VStack align="start">
                 <HStack>
-                  {/* {notifiedEvents.includes(event.id) && <BellIcon color="red.500" />}
+                  {notifiedEvents.includes(event.id) && <BellIcon color="red.500" />}
                   <Text
                     fontWeight={notifiedEvents.includes(event.id) ? 'bold' : 'normal'}
                     color={notifiedEvents.includes(event.id) ? 'red.500' : 'inherit'}
                   >
                     {event.title}
-                  </Text> */}
+                  </Text>
                 </HStack>
                 <Text>{event.date}</Text>
                 <Text>
